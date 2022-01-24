@@ -1,0 +1,1570 @@
+2.1.
+
+INTRODUCTION
+
+2.1
+
+Introduction
+
+MUltivariable methods are routinely utilized in statistical analyses across a
+
+wide range of domains. Logistic regression is the most frequently used
+method for modelling binary response data and binary classiﬁcation.
+
+When the response variable is binary, it characteristically takes the form of 1/0,
+with 1 normally indicating a success and 0 a failure. Multivariable methods usually
+assume a relationship between two or more independent, predictor variables, and
+one dependent, response variable. The predicted value of a response variable may be
+expressed as a sum of products, wherein each product is formed by multiplying the
+value of the variable and its coefﬁcient. How the coefﬁcients are computed? from a
+respective data set. Logistic regression is heavily used in supervised machine learning
+and has become the workhorse for both binary and multiclass classiﬁcation problems.
+Many of the questions introduced in this chapter are crucial for truly understanding
+the inner-workings of artiﬁcial neural networks.
+
+2.2 Problems
+
+2.2.1 General Concepts
+
+PRB-4  CH.PRB- 2.1.
+
+True or False: For a ﬁxed number of observations in a data set, introducing more vari-
+ables normally generates a model that has a better ﬁt to the data. What may be the drawback
+of such a model ﬁtting strategy?
+
+PRB-5  CH.PRB- 2.2.
+
+Deﬁne the term “odds of success” both qualitatively and formally. Give a numerical
+
+example that stresses the relation between probability and odds of an event occurring.
+
+PRB-6  CH.PRB- 2.3.
+
+1. Deﬁne what is meant by the term "interaction", in the context of a logistic regression
+
+predictor variable.
+
+12
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+2. What is the simplest form of an interaction? Write its formulae.
+
+3. What statistical tests can be used to attest the signiﬁcance of an interaction term?
+
+PRB-7  CH.PRB- 2.4.
+
+True or False: In machine learning terminology, unsupervised learning refers to the
+mapping of input covariates to a target response variable that is attempted at being predicted
+when the labels are known.
+
+PRB-8  CH.PRB- 2.5.
+
+Complete the following sentence: In the case of logistic regression, the response vari-
+
+able is the log of the odds of being classiﬁed in [...].
+
+PRB-9  CH.PRB- 2.6.
+
+Describe how in a logistic regression model, a transformation to the response variable is
+applied to yield a probability distribution. Why is it considered a more informative repres-
+entation of the response?
+
+PRB-10  CH.PRB- 2.7.
+
+Complete the following sentence: Minimizing the negative log likelihood also means
+
+maximizing the [...] of selecting the [...] class.
+
+2.2.2 Odds, Log-odds
+
+PRB-11  CH.PRB- 2.8.
+
+Assume the probability of an event occurring is p = 0.1.
+
+1. What are the odds of the event occurring?.
+
+2. What are the log-odds of the event occurring?.
+
+13
+
+3. Construct the probability of the event as a ratio that equals 0.1.
+
+2.2. PROBLEMS
+
+PRB-12  CH.PRB- 2.9.
+
+ility of success is 0.8.
+
+True or False: If the odds of success in a binary response is 4, the corresponding probab-
+
+PRB-13  CH.PRB- 2.10.
+
+their respective odds.
+
+Draw a graph of odds to probabilities, mapping the entire range of probabilities to
+
+PRB-14  CH.PRB- 2.11.
+
+The logistic regression model is a subset of a broader range of machine learning models
+known as generalized linear models (GLMs), which also include analysis of variance (AN-
+OVA), vanilla linear regression, etc. There are three components to a GLM; identify these
+three components for binary logistic regression.
+
+PRB-15  CH.PRB- 2.12.
+
+logit forms the linear decision boundary:
+
+Let us consider the logit transformation, i.e., log-odds. Assume a scenario in which the
+
+ 
+
+log
+
+Pr(Y = 1|X)
+Pr(Y = 0|X)
+
+!
+
+= θ0 + θT X,
+
+(2.1)
+
+for a given vector of systematic components X and predictor variables θ. Write the mathem-
+atical expression for the hyperplane that describes the decision boundary.
+
+PRB-16  CH.PRB- 2.13.
+
+of each other.
+
+True or False: The logit function and the natural logistic (sigmoid) function are inverses
+
+14
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+2.2.3 The Sigmoid
+
+The sigmoid (Fig. 2.1) also known as the logistic function, is widely used in binary
+classiﬁcation and as a neuron activation function in artiﬁcial neural networks.
+
+σ(x) = 1
+σ(x) =
+1
+
+1+e−4x
+1+e−15x
+
+y
+
+1,0
+
+0,8
+
+0,6
+
+0,4
+
+0,2
+
+−1,0 −0,8 −0,6 −0,4 −0,2
+
+0,2
+
+0,4
+
+0,6
+
+0,8
+
+x
+1,0
+
+FIGURE 2.1: Examples of two sigmoid functions.
+
+PRB-17  CH.PRB- 2.14.
+
+Compute the derivative of the natural sigmoid function:
+
+σ(x) =
+
+1
+
+1 + e−x
+
+∈ (0, 1).
+
+(2.2)
+
+PRB-18  CH.PRB- 2.15.
+
+Remember that in logistic regression, the hypothesis function for some parameter vector
+
+β and measurement vector x is deﬁned as:
+
+hβ(x) = g(βT x) =
+
+= P(y = 1|x; β),
+
+1
+
+1 + e−βT x
+
+(2.3)
+
+15
+
+2.2. PROBLEMS
+
+Suppose the coefﬁcients of a logistic regression model with independent variables are as
+
+where y holds the hypothesis value.
+follows: β0 = −1.5, β1 = 3, β2 = −0.5.
+Assume additionally, that we have an observation with the following values for the dependent
+variables: x1 = 1, x2 = 5. As a result, the logit equation becomes:
+
+logit = β0 + β1x1 + β2x2.
+
+(2.4)
+
+1. What is the value of the logit for this observation?
+
+2. What is the value of the odds for this observation?
+3. What is the value of P(y = 1) for this observation?
+
+2.2.4 Truly Understanding Logistic Regression
+
+PRB-19  CH.PRB- 2.16.
+
+Proton therapy (PT) [2] is a widely adopted form of treatment for many types of cancer
+
+including breast and lung cancer (Fig. 2.2).
+
+FIGURE 2.2: Pulmonary nodules (left) and breast cancer (right).
+
+A PT device which was not properly calibrated is used to simulate the treatment of
+cancer. As a result, the PT beam does not behave normally. A data scientist collects inform-
+ation relating to this simulation. The covariates presented in Table 2.1 are collected during
+
+16
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+the experiment. The columns Yes and No indicate if the tumour was eradicated or not, re-
+spectively.
+
+Tumour eradication
+
+Cancer Type Yes
+
+Breast
+Lung
+
+560
+69
+
+No
+
+260
+36
+
+TABLE 2.1: Tumour eradication statistics.
+
+Referring to Table 2.1:
+
+1. What is the explanatory variable and what is the response variable?
+
+2. Explain the use of relative risk and odds ratio for measuring association.
+
+3. Are the two variables positively or negatively associated?
+
+Find the direction and strength of the association using both relative risk and odds
+ratio.
+
+4. Compute a 95% conﬁdence interval (CI) for the measure of association.
+
+5. Interpret the results and explain their signiﬁcance.
+
+PRB-20  CH.PRB- 2.17.
+
+Consider a system for radiation therapy planning (Fig. 2.3). Given a patient with a ma-
+lignant tumour, the problem is to select the optimal radiation exposure time for that patient.
+A key element in this problem is estimating the probability that a given tumour will be erad-
+icated given certain covariates. A data scientist collects information relating to this radiation
+therapy system.
+
+17
+
+2.2. PROBLEMS
+
+FIGURE 2.3: A multi-detector positron scanner used to locate tumours.
+
+The following covariates are collected; X1 denotes time in milliseconds that a patient is
+irradiated with, X2 = holds the size of the tumour in centimeters, and Y notates a binary re-
+sponse variable indicating if the tumour was eradicated. Assume that each response’ variable
+Yi is a Bernoulli random variable with success parameter pi, which holds:
+
+pi = eβ0+β1x1+β2x2
+1 + eβ0+β1x1+β2x2
+
+.
+
+(2.5)
+
+The data scientist ﬁts a logistic regression model to the dependent measurements and pro-
+duces these estimated coefﬁcients:
+
+ˆβ0 = −6,
+ˆβ1 = 0.05,
+ˆβ2 = 1.
+
+(2.6)
+
+1. Estimate the probability that, given a patient who undergoes the treatment for 40
+milliseconds and who is presented with a tumour sized 3.5 centimetres, the system
+eradicates the tumour.
+
+2. How many milliseconds the patient in part (a) would need to be radiated with to have
+
+exactly a 50% chance of eradicating the tumour?
+
+18
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+PRB-21  CH.PRB- 2.18.
+
+Recent research [3] suggests that heating mercury containing dental amalgams may
+cause the release of toxic mercury fumes into the human airways. It is also presumed that
+drinking hot coffee, stimulates the release of mercury vapour from amalgam ﬁllings (Fig.
+2.4).
+
+FIGURE 2.4: A dental amalgam.
+
+To study factors that affect migraines, and in particular, patients who have at least four
+dental amalgams in their mouth, a data scientist collects data from 200K users with and
+without dental amalgams. The data scientist then ﬁts a logistic regression model with an
+indicator of a second migraine within a time frame of one hour after the onset of the ﬁrst mi-
+graine, as the binary response variable (e.g., migraine=1, no migraine=0). The data scientist
+believes that the frequency of migraines may be related to the release of toxic mercury fumes.
+
+There are two independent variables:
+
+1. X1 = 1 if the patient has at least four amalgams; 0 otherwise.
+
+2. X2 = coffee consumption (0 to 100 hot cups per month).
+
+The output from training a logistic regression classiﬁer is as follows:
+
+Analysis of LR Parameter Estimates
+Parameter
+
+Estimate
+
+Std.Err
+
+Z-val
+
+Pr>|Z|
+
+-6.36347
+
+3.21362
+
+-1.980
+
+0.0477
+
+-1.02411
+
+1.17101
+0.11904 0.05497
+
+-0.875
+2.165
+
+0.3818
+0.0304
+
+Intercept
+$X_1$
+$X_2$
+
+19
+
+2.2. PROBLEMS
+
+1. Using X1 and X2, express the odds of a patient having a migraine for a second time.
+
+2. Calculate the probability of a second migraine for a patient that has at least four
+
+amalgams and drank 100 cups per month?
+
+3. For users that have at least four amalgams, is high coffee intake associated with an
+
+increased probability of a second migraine?
+
+4. Is there statistical evidence that having more than four amalgams is directly associ-
+
+ated with a reduction in the probability of a second migraine?
+
+PRB-22  CH.PRB- 2.19.
+
+To study factors that affect Alzheimer’s disease using logistic regression, a researcher
+considers the link between gum (periodontal) disease and Alzheimer as a plausible risk factor
+[1]. The predictor variable is a count of gum bacteria (Fig. 2.5) in the mouth.
+
+FIGURE 2.5: A chain of spherical bacteria.
+
+The response variable, Y , measures whether the patient shows any remission (e.g. yes=1).
+
+The output from training a logistic regression classiﬁer is as follows:
+
+Parameter DF Estimate
+Intercept
+gum bacteria
+
+Std
+-4.8792 1.2197
+0.0258 0.0194
+
+1
+1
+
+1. Estimate the probability of improvement when the count of gum bacteria of a patient
+
+is 33.
+
+20
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+2. Find out the gum bacteria count at which the estimated probability of improvement is
+
+0.5.
+
+3. Find out the estimated odds ratio of improvement for an increase of 1 in the total gum
+
+bacteria count.
+
+4. Obtain a 99% conﬁdence interval for the true odds ratio of improvement increase of
+1 in the total gum bacteria count. Remember that the most common conﬁdence levels
+are 90%, 95%, 99%, and 99.9%. Table 9.1 lists the z values for these levels.
+
+Conﬁdence Level
+
+90%
+95%
+99%
+99.9%
+
+z
+
+1.645
+1.960
+2.576
+3.291
+
+TABLE 2.2: Common conﬁdence levels.
+
+PRB-23  CH.PRB- 2.20.
+
+Recent research [4] suggests that cannabis (Fig. 2.6) and cannabinoids administration
+
+in particular, may reduce the size of malignant tumours in rats.
+
+FIGURE 2.6: Cannabis.
+
+21
+
+To study factors affecting tumour shrinkage, a deep learning researcher collects data from
+two groups; one group is administered with placebo (a substance that is not medicine) and
+the other with cannabinoids. His main research revolves around studying the relationship
+(Table 2.3) between the anticancer properties of cannabinoids and tumour shrinkage:
+
+2.2. PROBLEMS
+
+Tumour Shrinkage In Rats
+
+Group
+
+Cannabinoids
+
+Placebo
+
+Sum
+
+Yes
+
+60
+130
+190
+
+No
+
+6833
+6778
+13611
+
+Sum
+
+6893
+6909
+13801
+
+TABLE 2.3: Tumour shrinkage in rats.
+
+For the true odds ratio:
+
+1. Find the sample odds ratio.
+
+2. Find the sample log-odds ratio.
+3. Compute a 95% conﬁdence interval (z0.95 = 1.645; z0.975 = 1.96) for the true log odds
+
+ratio and true odds ratio.
+
+2.2.5 The Logit Function and Entropy
+
+PRB-24  CH.PRB- 2.21.
+
+deﬁned as:
+
+The entropy (see Chapter 4) of a single binary outcome with probability p to receive 1 is
+
+H(p) ≡ −p log p − (1 − p) log(1 − p).
+
+(2.7)
+
+1. At what p does H(p) attain its maximum value?
+2. What is the relationship between the entropy H(p) and the logit function, given p?
+
+22
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+2.2.6 Python/PyTorch/CPP
+
+PRB-25  CH.PRB- 2.22.
+
+The following C++ code (Fig. 2.7) is part of a (very basic) logistic regression implement-
+
+ation module. For a theoretical discussion underlying this question, refer to problem 2.17.
+
+1 #include ...
+2 std::vector<double> theta {-6,0.05,1.0};
+3 double sigmoid(double x) {
+4 double tmp =1.0 / (1.0 + exp(-x));
+5 std::cout << "prob=" << tmp<<std::endl;
+6 return tmp;
+7 }
+8 double hypothesis(std::vector<double> x){
+9 double z;
+10 z=std::inner_product(std::begin(x), std::end(x),
+
+,→
+
+std::begin(theta), 0.0);
+
+11 std::cout << "inner_product=" << z<<std::endl;
+12 return sigmoid(z);
+13 }
+14 int classify(std::vector<double> x){
+15 int hypo=hypothesis(x) > 0.5f;
+16 std::cout << "hypo=" << hypo<<std::endl;
+17 return hypo;
+18 }
+19 int main() {
+20 std::vector<double> x1 {1,40,3.5};
+21 classify(x1);
+22 }
+
+FIGURE 2.7: Logistic regression in CPP
+
+1. Explain the purpose of line 10, i.e., inner_product.
+
+2. Explain the purpose of line 15, i.e., hypo(x) > 0.5f.
+
+23
+
+2.2. PROBLEMS
+
+3. What does θ (theta) stand for in line 2?
+
+4. Compile and run the code, you can use:
+
+https://repl.it/languages/cpp11 to evaluate the code.
+What is the output?
+
+PRB-26  CH.PRB- 2.23.
+
+matrix.
+
+The following Python code (Fig. 2.8) runs a very simple linear model on a two-dimensional
+
+1 import torch
+2 import torch.nn as nn
+3
+4 lin = nn.Linear(5, 7)
+5 data = (torch.randn(3, 5))
+
+6
+7 print(lin(data).shape)
+8 >?
+
+FIGURE 2.8: A linear model in PyTorch
+
+Without actually running the code, determine what is the size of the matrix printed as a
+
+result of applying the linear model on the matrix.
+
+PRB-27  CH.PRB- 2.24.
+
+tion module in Python.
+
+The following Python code snippet (Fig. 2.9) is part of a logistic regression implementa-
+
+24
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+1 from scipy.special import expit
+2 import numpy as np
+3 import math
+4
+5 def Func001(x):
+6
+
+e_x = np.exp(x - np.max(x))
+return e_x / e_x.sum()
+
+7
+
+8
+9 def Func002(x):
+10
+
+return 1 / (1 + math.exp(-x))
+
+11
+12 def Func003(x):
+13
+
+return x * (1-x)
+
+FIGURE 2.9: Logistic regression methods in Python.
+
+Analyse the methods Func001 , Func002 and Func003 presented in Fig. 2.9, ﬁnd their
+
+purposes and name them.
+
+PRB-28  CH.PRB- 2.25.
+
+Python.
+
+The following Python code snippet (Fig. 2.10) is part of a machine learning module in
+
+25
+
+2.2. PROBLEMS
+
+1 ^^I^^I
+2 from scipy.special import expit
+3 import numpy as np
+4 import math
+5 ^^I^^I
+6 def Func006(y_hat, y):
+7
+
+if y == 1:
+
+8
+
+9
+
+10
+
+return -np.log(y_hat)
+
+else:
+
+return -np.log(1 - y_hat)^^I
+
+FIGURE 2.10: Logistic regression methods in Python.
+
+Analyse the method Func006 presented in Fig. 2.10. What important concept in machine-
+
+learning does it implement?
+
+PRB-29  CH.PRB- 2.26.
+
+same function.
+
+The following Python code snippet (Fig. 2.11) presents several different variations of the
+
+26
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+1 ^^I^^I
+2 from scipy.special import expit
+3 import numpy as np
+4 import math
+5
+6 def Ver001(x):
+7
+
+return 1 / (1 + math.exp(-x))
+
+8
+9 def Ver002(x):
+10
+
+return 1 / (1 + (np.exp(-x)))
+
+11
+12 WHO_AM_I = 709
+
+13
+14 def Ver003(x):
+15
+
+return 1 / (1 + np.exp(-(np.clip(x, -WHO_AM_I, None))))
+
+FIGURE 2.11: Logistic regression methods in Python.
+
+1. Which mathematical function do these methods implement?
+
+2. What is signiﬁcant about the number 709 in line 11?
+
+3. Given a choice, which method would you use?
+
+2.3 Solutions
+
+2.3.1 General Concepts
+
+SOL-4  CH.SOL- 2.1.
+
+True. However, when an excessive and unnecessary number of variables is used in a lo-
+gistic regression model, peculiarities (e.g., speciﬁc attributes) of the underlying data set dis-
+proportionately affect the coefﬁcients in the model, a phenomena commonly referred to as
+“overﬁtting”. Therefore, it is important that a logistic regression model does not start training
+with more variables than is justiﬁed for the given number of observations.
+(cid:4)
+
+27
+
+2.3. SOLUTIONS
+
+The odds of success are deﬁned as the ratio between the probability of success p ∈ [0, 1]
+
+SOL-5  CH.SOL- 2.2.
+and the probability of failure 1 − p. Formally:
+ 
+Odds(p) ≡
+
+!
+
+p
+1 − p
+
+.
+
+(2.8)
+
+For instance, assuming the probability of success of an event is p = 0.7. Then, in our
+example, the odds of success are 7/3, or 2.333 to 1. Naturally, in the case of equal probabilities
+where p = 0.5, the odds of success is 1 to 1.
+
+(cid:4)
+
+SOL-6  CH.SOL- 2.3.
+
+1. An interaction is the product of two single predictor variables implying a non-additive
+
+effect.
+
+2. The simplest interaction model includes a predictor variable formed by multiplying two
+ordinary predictors. Let us assume two variables X and Z. Then, the logistic regression
+model that employs the simplest form of interaction follows:
+
+β0 + β1X + β2Z + β3XZ,
+
+(2.9)
+
+where the coefﬁcient for the interaction term XZ is represented by predictor β3.
+
+3. For testing the contribution of an interaction, two principal methods are commonly
+employed; the Wald chi-squared test or a likelihood ratio test between the model with
+and without the interaction term. Note: How does interaction relates to information
+theory? What added value does it employ to enhance model performance?
+
+(cid:4)
+
+SOL-7  CH.SOL- 2.4.
+
+False. This is exactly the deﬁnition of supervised learning; when labels are known then
+(cid:4)
+
+supervision guides the learning process.
+
+28
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+SOL-8  CH.SOL- 2.5.
+
+In the case of logistic regression, the response variable is the log of the odds of being clas-
+siﬁed in a group of binary or multi-class responses. This deﬁnition essentially demonstrates
+that odds can take the form of a vector.
+(cid:4)
+
+SOL-9  CH.SOL- 2.6.
+
+When a transformation to the response variable is applied, it yields a probability distribu-
+tion over the output classes, which is bounded between 0 and 1; this transformation can be
+employed in several ways, e.g., a softmax layer, the sigmoid function or classic normalization.
+This representation facilitates a soft-decision by the logistic regression model, which permits
+construction of probability-based processes over the predictions of the model. Note: What are
+the pros and cons of each of the three aforementioned transformations?
+(cid:4)
+
+SOL-10  CH.SOL- 2.7.
+
+Minimizing the negative log likelihood also means maximizing the likelihood of selecting
+(cid:4)
+
+the correct class.
+
+2.3.2 Odds, Log-odds
+
+SOL-11  CH.SOL- 2.8.
+
+1. The odds of the event occurring are, by deﬁnition:
+
+odds = (0.1
+
+0.9) = 0.11.
+
+2. The log-odds of the event occurring are simply taken as the log of the odds:
+
+log-odds = ln(0.1/0.9) = −2.19685.
+
+3. The probability may be constructed by the following representation:
+
+probability = odds
+
+odds + 1 = 0.11
+
+1.11 = 0.1,
+
+(2.10)
+
+(2.11)
+
+(2.12)
+
+29
+
+or, alternatively:
+
+p = exp (ln odds)
+
+exp (ln odds) + 1 = 0.11
+
+1.11 = 0.1.
+
+Note: What is the intuition behind this representation?
+
+2.3. SOLUTIONS
+
+(2.13)
+
+(cid:4)
+
+SOL-12  CH.SOL- 2.9.
+
+True. By deﬁnition of odds, it is easy to notice that p = 0.8 satisﬁes the following relation:
+
+odds = (0.8
+
+0.2) = 4
+
+(2.14)
+
+(cid:4)
+
+SOL-13  CH.SOL- 2.10.
+
+The graph of odds to probabilities is depicted in Figure 2.12.
+
+Odds
+
+odds(p) = p
+1−p
+
+10,0
+
+8,0
+
+6,0
+
+4,0
+
+2,0
+
+0,1
+
+0,2
+
+0,3
+
+0,4
+
+0,5
+
+0,6
+
+Probability
+0,7
+
+0,8
+
+0,9
+
+FIGURE 2.12: Odds vs. probability values.
+
+(cid:4)
+
+30
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+SOL-14  CH.SOL- 2.11.
+
+A binary logistic regression GLM consists of there components:
+
+1. Random component: refers to the probability distribution of the response variable (Y ),
+e.g., binomial distribution for Y in the binary logistic regression, which takes on the
+values Y = 0 or Y = 1.
+
+2. Systematic component: describes the explanatory variables:
+
+(X1, X2, ...) as a combination of linear predictors. The binary case does not constrain
+these variables to any degree.
+
+3. Link function: speciﬁes the link between random and systematic components. It says
+how the expected value of the response relates to the linear predictor of explanatory
+variables.
+Note: Assume that Y denotes whether a human voice activity was detected (Y = 1)
+or not (Y = 0) in a give time frame. Propose two systematic components and a link
+function adjusted for this task.
+
+SOL-15  CH.SOL- 2.12.
+
+The hyperplane is simply deﬁned by:
+
+θ0 + θT X = 0.
+
+(cid:4)
+
+(2.15)
+
+Note: Recall the use of the logit function and derive this decision boundary rigorously.
+
+(cid:4)
+
+SOL-16  CH.SOL- 2.13.
+
+True. The logit function is deﬁned as:
+
+z(p) = logit(p) = log
+
+ 
+
+!
+
+,
+
+p
+1 − p
+
+(2.16)
+
+31
+
+2.3. SOLUTIONS
+
+for any p ∈ [0, 1]. A simple set of algebraic equations yields the inverse relation:
+
+p(z) = exp z
+1 + exp z
+
+,
+
+(2.17)
+
+which exactly describes the relation between the output and input of the logistic function, also
+known as the sigmoid.
+(cid:4)
+
+2.3.3 The Sigmoid
+
+SOL-17  CH.SOL- 2.14.
+
+or derivation via the softmax function.
+
+There are various approaches to solve this problem, here we provide two; direct derivation
+
+d
+
+1. Direct derivation:
+
+dx σ(x) = d
+
+dx((1 + e
+2. Softmax derivation:
+
+−x)−1) = −((1 + e
+
+−x)(−2)) d
+
+dx(1 + e
+
+−x) = e
+−x
+
+(1+e−x)2 .
+
+In a classiﬁcation problem with mutually exclusive classes, where all of the values are
+positive and sum to one, a softmax activation function may be used. By deﬁnition, the
+softmax activation function consists of n terms, such that ∀i ∈ [1, n]:
+
+f(θi) = eθiP
+
+=
+
+1
+1 + e−θi
+
+k evk
+
+P
+
+.
+
+k6=i eθk
+
+(2.18)
+
+To compute the partial derivative of 2.18, we treat all θk where k 6= i as constants and
+then differentiate θi using regular differentiation rules. For a given θi, let us deﬁne:
+
+(2.19)
+
+(2.20)
+
+(2.21)
+
+32
+
+X
+
+k6=i
+
+β =
+
+eθk,
+
+and
+
+f(θi) =
+
+It can now be shown that the derivative with respect to θi holds:
+
+= (1 + βe
+
+−θi)−1.
+
+1
+
+1 + βe−θi
+(cid:16)
+
+(cid:17)−2
+
+0(θi) =
+
+f
+
+1 + βe
+
+−θi
+
+−θi,
+
+βe
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+which can take on the informative form of:
+
+0(θi) = f(θi)(1 − f(θi)).
+
+f
+
+(2.22)
+It should be noted that 2.21 holds for any constant β, and for β = 1 it clearly reduces
+to the sigmoid activation function.
+Note: Characterize the sigmoid function when its argument approaches 0,∞ and −∞.
+What undesired properties of the sigmoid function do this values entail when considered as an
+activation function?
+
+SOL-18  CH.SOL- 2.15.
+
+(cid:4)
+
+1. The logit value is simply obtained by substituting the values of the dependent variables
+
+and model coefﬁcients into the linear logistic regression model, as follows:
+logit = β0 + β1x1 + β2x2 = −1.5 + 3 · 1 + −0.5 · 5 = −1.
+
+(2.23)
+
+2. According to the natural relation between the logit and the odds, the following holds:
+
+odds = elogit = eβ0+β1x1+β2x2 = e
+
+−1 = 0.3678794.
+
+3. The odds ratio is, by deﬁnition:
+
+odds = P(y = 1)
+P(y = 0) ,
+
+so the logistic response function is:
+1
+
+P(y = 1) =
+
+1 + e−logit = 1
+
+1 + e1 = 0.2689414.
+
+2.3.4 Truly Understanding Logistic Regression
+
+33
+
+(2.24)
+
+(2.25)
+
+(2.26)
+
+(cid:4)
+
+2.3. SOLUTIONS
+
+SOL-19  CH.SOL- 2.16.
+
+1. Tumour eradication (Y ) is the response variable and cancer type (X) is the explanatory
+
+variable.
+
+2. Relative risk (RR) is the ratio of risk of an event in one group (e.g., exposed group)
+versus the risk of the event in the other group (e.g., non-exposed group). The odds ratio
+(OR) is the ratio of odds of an event in one group versus the odds of the event in the
+other group.
+
+3. If we calculate odds ratio as a measure of association:
+
+ˆθ = 560 × 36
+
+69 × 260 = 1.23745.
+
+(2.27)
+
+And the log-odds ratio is (log(1.23745)) = 0.213052:
+The odds ratio is larger than one, indicating that the odds for a breast cancer is more
+than the odds for a lung cancer to be eradicated. Notice however, that this result is too
+close to one, which prevents conclusive decision regarding the odds relation.
+Additionally, if we calculate relative risk as a measure of association:
+
+RR =
+
+560
+
+560+260
+
+69
+
+69+36
+
+= 1.0392.
+
+(2.28)
+
+4. The 95% conﬁdence interval for the odds-ratio, θ is computed from the sample conﬁd-
+
+ence interval for log odds ratio:
+
+(2.29)
+
+(2.30)
+
+34
+
+s
+
+(cid:16)
+
+(cid:17)
+log(ˆθ)
+
+ˆσ
+
+=
+
+560 + 1
+1
+
+260 + 1
+
+69 + 1
+
+36 = 0.21886.
+
+Therefore, the 95% CI for log (θ) is:
+
+0.213052 ± 1.95 × 0.21886 = (0.6398298,−0.2137241).
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+Therefore, the 95% CI for θ is:
+
+−0.210, e0.647) = (0.810, 1.909).
+
+(e
+
+(2.31)
+
+5. The CI (0.810, 1.909) contains 1, which indicates that the true odds ratio is not signi-
+ﬁcantly different from 1 and there is not enough evidence that tumour eradication is
+dependent on cancer type.
+
+(cid:4)
+
+SOL-20  CH.SOL- 2.17.
+
+1. By using the deﬁned values for X1 and X2, and the known logistic regression model,
+
+substitution yields:
+
+ˆp(X) =
+
+−6+0.05X1+X2
+e
+
+(1 + e−6+0.05X1+X2) = 0.3775.
+
+2. The equation for the predicted probability tells us that:
+
+−6+0.05X1+3.5
+e
+
+(1 + e−6+0.05X1+3.5) = 0.5,
+
+which is equivalent to constraining:
+
+−6+0.05X1+3.5 = 1.
+e
+
+(2.32)
+
+(2.33)
+
+(2.34)
+
+By taking the logarithm of both sides, we get that the number of milliseconds needed is:
+
+X1 = 2.5
+
+0.05 = 50.
+
+(2.35)
+
+(cid:4)
+
+SOL-21  CH.SOL- 2.18.
+
+35
+
+2.3. SOLUTIONS
+
+For the purpose of this exercise, it is instructive to pre-deﬁne z as:
+z (X1, X2) = −6.36 − 1.02 × X1 + 0.12 × X2.
+
+1. By employing the classic logistic regression model:
+
+odds = exp(z (X1, X2)).
+
+(2.36)
+
+(2.37)
+
+2. By substituting the given values of X1, X2 into z (X1, X2), the probability holds:
+
+p = exp(z (1, 100))/(1 + exp(z (1, 100))) = 0.99.
+
+(2.38)
+
+3. Yes. The coefﬁcient for coffee consumption is positive (0.119) and the p-value is less
+
+than 0.05 (0.0304).
+Note: Can you describe the relation between these numerical relations and the positive
+conclusion?
+
+4. No. The p-value for this predictor is 0.3818 > 0.05.
+
+Note: Can you explain why this inequality implicates a lack of statistical evidence?
+
+SOL-22  CH.SOL- 2.19.
+
+1. The estimated probability of improvement is:
+
+ˆπ(gum bacteria) =
+exp(−4.8792 + 0.0258 × gum bacteria)
+1 + exp(−4.8792 + 0.0258 × gum bacteria).
+
+Hence, ˆπ(33) = 0.01748.
+
+(cid:4)
+
+36
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+2. For ˆπ(gum bacteria) = 0.5 we know that:
+
+ˆπ(gum) = exp(ˆα + ˆβx)
+1 + exp(ˆα + ˆβx)
+
+= 0.5
+
+gum bacteria = −ˆα/ ˆβ = 4.8792/0.0258 = 189.116.
+
+3. The estimated odds ratio are given by:
+
+exp( ˆβ) = exp(0.0258) = 1.0504.
+
+4. A 99% conﬁdence interval for β is calculated as follows:
+
+ˆβ ± z0.005 × ASE( ˆβ) =
+0.0258 ± 2.576 × 0.0194
+
+= (−0.00077, 0.9917).
+
+Therefore, a 99% conﬁdence interval for the true odds ratio exp(β) is given by:
+
+(exp(−0.00077), exp(0.9917)) = (0.99923, 2.6958).
+
+SOL-23  CH.SOL- 2.20.
+
+1. The sample odds ratio is:
+
+ˆθ = 130 × 6833
+
+60 × 6778 = 2.1842.
+
+(2.39)
+
+(2.40)
+
+(2.41)
+
+(2.42)
+(2.43)
+(2.44)
+
+(2.45)
+
+(cid:4)
+
+(2.46)
+
+37
+
+2. The estimated standard error for log
+
+(cid:16)
+
+(cid:17)
+log ˆθ
+
+ˆσ
+
+=
+
+3. According to previous sections, the 95% CI for the true log odds ratio is:
+
+0.7812 ± 1.96 × 0.1570 = (0.4734, 1.0889).
+
+Correspondingly, the 95% CI for the true odds ratio is:
+
+(e0.4734, e1.0889) = (1.6060, 2.9710).
+
+2.3. SOLUTIONS
+
+s
+
+(cid:16)
+
+(cid:17)
+ˆθ
+6833 + 1
+1
+60 + 1
+
+is:
+
+130 + 1
+
+6778 = 0.1570.
+
+(2.47)
+
+(2.48)
+
+(2.49)
+
+(cid:4)
+
+2.3.5 The Logit Function and Entropy
+
+SOL-24  CH.SOL- 2.21.
+
+1. The entropy (Fig. 2.13) has a maximum value of log2(2) for probability p = 1/2, which
+is the most chaotic distribution. A lower entropy is a more predictable outcome, with
+zero providing full certainty.
+
+2. The derivative of the entropy with respect to p yields the negative of the logit func-
+
+tion:
+
+dH(p)
+
+dp
+
+= −logit(p).
+
+Note: The curious reader is encouraged to rigorously prove this claim.
+
+2.3.6 Python, PyTorch, CPP
+
+SOL-25  CH.SOL- 2.22.
+
+(2.50)
+
+(cid:4)
+
+38
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+FIGURE 2.13: Binary entropy.
+
+1. During inference, the purpose of inner_product is to multiply the vector of logistic re-
+gression coefﬁcients with the vector of the input which we like to evaluate, e.g., calculate
+the probability and binary class.
+
+2. The line hypo(x) > 0.5f is commonly used for the evaluation of binary classiﬁcation
+wherein probability values above 0.5 (i.e., a threshold) are regarded as TRUE whereas
+values below 0.5 are regarded as FALSE.
+
+3. The term θ (theta) stands for the logistic regression coefﬁcients which were evaluated
+
+during training.
+
+4. The output is as follows:
+
+1 > inner_product=-0.5
+2 > prob=0.377541
+3 > hypo=0
+
+FIGURE 2.14: Logistic regression in C++
+
+(cid:4)
+
+SOL-26  CH.SOL- 2.23.
+
+39
+
+Because the second dimension of lin is 7, and the ﬁrst dimension of data is 3, the result-
+
+ing matrix has a shape of torch.Size([3, 7]) .
+
+(cid:4)
+
+2.3. SOLUTIONS
+
+SOL-27  CH.SOL- 2.24.
+
+the interviewer.
+
+Ideally, you should be able to recognize these functions immediately upon a request from
+
+1. A softmax function.
+
+2. A sigmoid function.
+
+3. A derivative of a sigmoid function.
+
+SOL-28  CH.SOL- 2.25.
+
+The function implemented in Fig. 2.10 is the binary cross-entropy function.
+
+(cid:4)
+
+(cid:4)
+
+SOL-29  CH.SOL- 2.26.
+
+1. All the methods are variations of the sigmoid function.
+2. In Python, approximately 1.797e + 308 holds the largest possible valve for a ﬂoating
+point variable. The logarithm of which is evaluated at 709.78. If you try to execute the
+following expression in Python, it will result in inf : np.log(1.8e + 308).
+
+3. I would use Ver003 because of its stability. Note: Can you entail why is this method
+
+more stable than the others?
+
+(cid:4)
+
+40
