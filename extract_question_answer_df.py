@@ -1,7 +1,7 @@
-import imp
-
-
 import re
+from numpy import append
+import pandas as pd
+import copy
 """
 Question has a common format PRB-<problem_number_full_document>  CH.PRB- <chapted_number>.<problem_number_chapterwise>.
 Example: PRB-4  CH.PRB- 2.1. 
@@ -12,28 +12,53 @@ Example: SOL-4  CH.SOL- 2.1.
 class ExtractDf:
     def __init__(self, path) -> None:
         self.path = path
-        self.df_columns = {
+        self.df_columns_template = {
             "problem_number": "",
             "chapterwise_problem_number" : "",
-            "question" : "",
-            "solution" : ""
+            "PRB" : [],
+            "SOL" : []
         }
         self.read_txt()
-        
+    
+    def convert_to_df(self):
+        dataset_list = []
+        for _,object in self.problem_sol_dict.items():
+            problem_dataset = {}
+            problem_dataset['problem_number'] = object["problem_number"]
+            problem_dataset['chapterwise_problem_number'] = object['chapterwise_problem_number']
+            problem_dataset["PRB"] = " ".join(object['PRB']).replace("-","")  
+            problem_dataset["SOL"] = " ".join(object["SOL"]).replace("-","")
+            dataset_list.append(problem_dataset)
+        df = pd.DataFrame(dataset_list)
+        df.to_csv("dataset_chapter_2.csv")
+        return df
+
     def prepare_problem_sol_dict(self):
         self.problem_sol_dict = {}
         for statement in self.text:
             problem_number,chapterwise_problem_number,type = self.detect_question_number(statement)
             if problem_number!= -1:
-                print(problem_number,chapterwise_problem_number,type)
-                # TODO
-                # self.prepare_problem_sol_dict[chapterwise_problem_number] = 
+                self.problem_number,self.chapterwise_problem_number,self.type = problem_number,chapterwise_problem_number,type         
+                if self.chapterwise_problem_number not in self.problem_sol_dict.keys():
+                    self.problem_sol_dict[self.chapterwise_problem_number] = {}
+                    self.problem_sol_dict[self.chapterwise_problem_number]["PRB"] =[]
+                    self.problem_sol_dict[self.chapterwise_problem_number]["SOL"] =[]
+                self.problem_sol_dict[self.chapterwise_problem_number]["problem_number"] = self.problem_number
+                self.problem_sol_dict[self.chapterwise_problem_number]["chapterwise_problem_number"] = self.chapterwise_problem_number
+                
             else:
-                print(statement)
+                try:
+                    self.problem_sol_dict[self.chapterwise_problem_number][self.type].append(statement)
+                except Exception as AttributeError:
+                    pass
         
     def detect_question_number(self,statement:str):
+        #PRB-22  CH.PRB- 2.19.
         if statement.startswith('PRB-') or statement.startswith('SOL-'):
-            return statement[4],statement[-4:],statement[:3]
+            first = re.findall(r'[0-9]',statement.split()[0])
+            second = re.findall(r'[0-9]*\.[0-9]*\.',statement)
+            # problem_number,chapterwise_problem_number,type
+            return "".join(first),second[0],statement[:3]
         return -1,-1,-1
     
     def processing(self):
@@ -59,6 +84,6 @@ class ExtractDf:
         
 
 if __name__ == '__main__':
-    path = 'test.txt'
+    path = 'Sample_Chapter_2_Q&A.txt'
     extract_df_from_text_obj = ExtractDf(path)
-    print(extract_df_from_text_obj.text)
+    df = extract_df_from_text_obj.convert_to_df()

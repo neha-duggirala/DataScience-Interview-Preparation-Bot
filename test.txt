@@ -1,0 +1,53 @@
+PRB-4  CH.PRB- 2.1.
+
+True or False: For a ﬁxed number of observations in a data set, introducing more vari-
+ables normally generates a model that has a better ﬁt to the data. What may be the drawback
+of such a model ﬁtting strategy?
+
+
+SOL-4  CH.SOL- 2.1.
+
+True. However, when an excessive and unnecessary number of variables is used in a lo-
+gistic regression model, peculiarities (e.g., speciﬁc attributes) of the underlying data set dis-
+proportionately affect the coefﬁcients in the model, a phenomena commonly referred to as
+“overﬁtting”. Therefore, it is important that a logistic regression model does not start training
+with more variables than is justiﬁed for the given number of observations.
+(cid:4)
+
+27
+
+PRB-7  CH.PRB- 2.4.
+
+True or False: In machine learning terminology, unsupervised learning refers to the
+mapping of input covariates to a target response variable that is attempted at being predicted
+when the labels are known.
+
+PRB-8  CH.PRB- 2.5.
+
+Complete the following sentence: In the case of logistic regression, the response vari-
+
+able is the log of the odds of being classiﬁed in [...].
+SOL-7  CH.SOL- 2.4.
+
+False. This is exactly the deﬁnition of supervised learning; when labels are known then
+(cid:4)
+
+supervision guides the learning process.
+
+28
+
+Chapter 2
+
+LOGISTIC REGRESSION
+
+SOL-8  CH.SOL- 2.5.
+
+In the case of logistic regression, the response variable is the log of the odds of being clas-
+siﬁed in a group of binary or multi-class responses. This deﬁnition essentially demonstrates
+that odds can take the form of a vector.
+
+(2.19)
+
+(2.20)
+
+(2.21)
