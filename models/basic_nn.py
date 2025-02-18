@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.optim import SGD
+from torch.optim import SGD, Adam
 
 from utils import create_line_plot, plot_losses
 
@@ -68,7 +68,7 @@ class BasicNN_train(nn.Module):
 
 def train(model, ips, ops):
     
-    optimizer = SGD(model.parameters(), lr= 0.1)
+    optimizer = Adam(model.parameters(), lr= 0.1)
 
     print(f"before optimization, {model.b_final}")
     losses = []
