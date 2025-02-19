@@ -30,7 +30,7 @@ class ExtractDf:
             problem_dataset["SOL"] = " ".join(object["SOL"]).replace("-","")
             dataset_list.append(problem_dataset)
         df = pd.DataFrame(dataset_list)
-        df.to_csv("dataset_chapter_2.csv")
+        df.to_csv("dataprep_pipeline/data/dataset_chapter_2.csv")
         return df
 
     def prepare_problem_sol_dict(self):
