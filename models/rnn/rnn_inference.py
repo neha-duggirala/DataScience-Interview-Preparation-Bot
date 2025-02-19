@@ -5,10 +5,10 @@ import pandas as pd
 from gensim.models import Word2Vec
 
 # Load the trained model
-model = load_model('models/rnn_model.h5')
+model = load_model('models/rnn/rnn_model.h5')
 
 # Load the dataset to get the word_index and max_length
-dataset = pd.read_csv('data/dataset_test.csv')
+dataset = pd.read_csv('dataprep_pipeline/data/dataset_test.csv')
 
 # Extract the questions and answers columns
 questions = dataset['PRB'].tolist()
