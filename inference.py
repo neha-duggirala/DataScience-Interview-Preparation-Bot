@@ -25,7 +25,7 @@ def infernce(input_text_filepath, model_name):
 
     tokenization_pipeline = TokenizerPipeline(model_name, input_text_filepath)
     input_text_ids = tokenization_pipeline.run()
-    model = AutoModelForCausalLM.from_pretrained(model_name , proxies=proxies)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
     generated_tokens_with_prompt = model.generate(input_ids=input_text_ids)
 
     return generated_tokens_with_prompt
